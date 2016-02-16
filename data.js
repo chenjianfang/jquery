@@ -6,7 +6,7 @@
 *
 */
 ;(function($,window,document,undefined){
-	function FunAjax(ele,options){
+	function FunAjax(ele,options,callback){
 		this.$ele = ele;
 		this.defaults={
 			"$url":"",  //url地址
@@ -15,11 +15,11 @@
 			"_data":""       //请求获得的数据
 		};
 		this.settings = $.extend({},this.defaults,options);
+		this.callback() = callback;
 	}
 	FunAjax.prototype={
 		getData:function(){
 			var _this = this;
-			var _data;
 			$.ajax({
 				type:"GET",
 				url: this.settings.$url,
@@ -33,8 +33,7 @@
 				},
 				success:function(data){
 					_this.settings.$pageLoad.hide();
-					_data = data;
-					_this.returnData();
+					_this.callback(data);
 				},
 				error:function(){
 					alert("请求失败")
@@ -45,15 +44,10 @@
 
 			});	
 		},
-		returnData:function(){
-			return this.settings._data;
-		}
-
-
 	}
 
-	$.fn.CJFAjax=function(options){
-		var cjfajax = new FunAjax(this,options);
+	$.fn.CJFAjax=function(options,callback){
+		var cjfajax = new FunAjax(this,options,callback);
 
 		//调用方法
 		return cjfajax.getData();
