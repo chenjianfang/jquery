@@ -15,7 +15,7 @@
 			"_data":""       //请求获得的数据
 		};
 		this.settings = $.extend({},this.defaults,options);
-		this.callback() = callback;
+		this.callback = callback;
 	}
 	FunAjax.prototype={
 		getData:function(){
@@ -24,7 +24,7 @@
 				type:"GET",
 				url: this.settings.$url,
 				dataType:"json",
-				async:false,
+				async:true,
 				cache:false,
 				data:this.settings.$data,
 				beforeSend:function(){

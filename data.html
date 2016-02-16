@@ -23,7 +23,9 @@
 				"$url":"json/tra.json",
 				"$pageLoad":$(".page")
 			},function(data){
-				
+				$.each(data,function(index,ele){
+					$("body").append(ele["bb"]);
+				});
 			});
 		});
 	</script>
